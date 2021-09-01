@@ -1,0 +1,50 @@
+// Contain RPC service and the data types the services are going to accept and return
+
+// Version
+syntax = "proto3";
+
+
+message News {
+  uint32 newsId = 1;
+  string title = 2;
+  string description = 3;
+  string image = 4;
+  uint32 authorId = 5;
+}
+
+message Author {
+    uint32 author_id = 1;AuthorId
+    string author_name = 2;
+    string author_address = 3;
+    string contact_no = 4;
+}
+
+// RPC service
+service NewsService {
+// RPC Method
+  rpc GetAllNews (Empty) returns (NewsList) {}
+  rpc GetNews (NewsId) returns (News) {}
+  rpc DeleteNews (NewsId) returns (Empty) {}
+  rpc EditNews (News) returns (Empty) {}
+  rpc AddNews (News) returns (Empty) {}
+}
+
+service AuthorService {
+  rpc AddAuthor(Author) returns (AuthorId) {}
+}
+
+
+message AuthorId {
+  string id = 1;
+}
+
+message NewsId {
+  string id = 1;
+}
+
+// The Empty denotes void or nothing, which means nothing is expected. 
+message Empty {}
+
+message NewsList {
+ repeated News news = 1;
+}
